@@ -45,7 +45,7 @@ def main() -> None:
     )
     parser.add_argument("pdf", type=Path, help="Input PDF score.")
     parser.add_argument("-o", "--output", type=Path, default=None, help="Output MusicXML path (default: <input>-omr.musicxml).")
-    parser.add_argument("--fast", action="store_true", help="Faster inference (beam-width 2 instead of 5).")
+    parser.add_argument("--fast", action="store_true", help="Faster CPU inference only (beam-width 2 instead of 5).")
     parser.add_argument("--beam-width", type=int, default=None, help="Override beam width (default: 5, --fast: 2).")
     parser.add_argument("--work-dir", type=Path, default=None, help="Working directory for intermediate files.")
     parser.add_argument("--device", type=str, default=None, help="Force device (cuda or cpu).")
@@ -68,6 +68,9 @@ def main() -> None:
 
     # Detect device and set defaults
     device = args.device or _detect_device()
+    if args.fast and device != "cpu":
+        print("Error: --fast is only supported on CPU.", file=sys.stderr)
+        sys.exit(1)
     beam_width = args.beam_width
     if beam_width is None:
         beam_width = 2 if args.fast else 5

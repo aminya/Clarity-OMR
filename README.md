@@ -54,8 +54,8 @@ python omr.py score.pdf
 # Custom output path
 python omr.py score.pdf -o output.musicxml
 
-# Fast mode (beam-width 2 instead of 5, lower quality but ~2x faster)
-python omr.py score.pdf --fast
+# Fast CPU mode (beam-width 2 instead of 5, lower quality but ~2x faster)
+python omr.py score.pdf --device cpu --fast
 ```
 
 ### Options
@@ -63,7 +63,7 @@ python omr.py score.pdf --fast
 | Flag | Description |
 |---|---|
 | `-o`, `--output` | Output MusicXML path (default: `<input>-omr.musicxml`) |
-| `--fast` | Faster inference with beam-width 2 (default: 5) |
+| `--fast` | Faster CPU-only inference with beam-width 2 (default: 5) |
 | `--beam-width N` | Override beam width directly |
 | `--device cuda/cpu` | Force device (auto-detected by default) |
 | `--pdf-dpi N` | PDF render resolution (default: 300) |
