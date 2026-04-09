@@ -126,9 +126,9 @@ class YoloStageAConfig:
     dedupe_iou_threshold: float = 0.85
     dedupe_vertical_overlap_threshold: float = 0.75
     dedupe_center_distance_ratio: float = 0.40
-    enforce_full_width_crops: bool = False
+    enforce_full_width_crops: bool = True
     full_width_left_page_edge: bool = True
-    full_width_right_page_edge: bool = False
+    full_width_right_page_edge: bool = True
     min_vertical_padding_px: float = 12.0
     min_right_padding_px: float = 48.0
     seed: int = 1337

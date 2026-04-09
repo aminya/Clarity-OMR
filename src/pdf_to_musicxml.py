@@ -196,7 +196,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--full-width-right-page-edge",
         action=argparse.BooleanOptionalAction,
-        default=False,
+        default=True,
         help="When full-width mode is enabled, force crop x_max to page right edge.",
     )
     parser.add_argument("--pdf-dpi", type=int, default=300, help="PDF render DPI.")
