@@ -726,8 +726,12 @@ def _write_musicxml_safe(music_score, output_path: Path) -> None:
     """
     try:
         music_score.write("musicxml", fp=str(output_path))
-    except KeyError:
-        # Fallback: export using GeneralObjectExporter with makeNotation=False
+    except KeyError as exc:
+        print(f"KeyError encountered: {exc}. Falling back to export without notation elements.")
+        # Remove parts with no measures — music21 rejects them in the makeNotation=False path.
+        empty_parts = [p for p in music_score.parts if not p.getElementsByClass("Measure")]
+        for p in empty_parts:
+            music_score.remove(p)
         from music21.musicxml.m21ToXml import GeneralObjectExporter
         exporter = GeneralObjectExporter(music_score)
         exporter.makeNotation = False
