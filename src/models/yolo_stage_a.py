@@ -121,7 +121,7 @@ class YoloStageAConfig:
     confidence_threshold: float = 0.25
     iou_threshold: float = 0.45
     system_overlap_threshold: float = 0.50
-    vertical_padding_ratio: float = 0.30
+    vertical_padding_ratio: float = 0.70
     horizontal_padding_ratio: float = 0.03
     dedupe_iou_threshold: float = 0.85
     dedupe_vertical_overlap_threshold: float = 0.75
@@ -129,7 +129,7 @@ class YoloStageAConfig:
     enforce_full_width_crops: bool = True
     full_width_left_page_edge: bool = True
     full_width_right_page_edge: bool = True
-    min_vertical_padding_px: float = 12.0
+    min_vertical_padding_px: float = 30.0
     min_right_padding_px: float = 48.0
     seed: int = 1337
 
@@ -472,7 +472,7 @@ class YoloStageA:
                 def _clamp_pad(desired: float, gap: float, same_system: bool) -> float:
                     if gap <= 0:
                         return min_v_pad
-                    ratio = 0.70 if same_system else 0.45
+                    ratio = 0.90 if same_system else 0.85
                     return max(min_v_pad, min(desired, gap * ratio))
 
                 if nearest_above_gap < float("inf"):
